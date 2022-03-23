@@ -1,40 +1,22 @@
 import React from "react";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 
 function App() {
   return (
 
   <body className="page">
     <div className="page__container">
-      <header className="header">
-        <img
-          src="./images/logo__mesto.svg"
-          alt="Лого место"
-          className="header__logo"
-        />
-      </header>
+      <Header />
+      <Main 
+      handleEditAvatarClick
+      handleEditProfileClick
+      handleAddPlaceClick
+      />
+      <Footer />
 
-      <main>
-        <section className="profile">
-          <img
-            src="./images/profile__image.jpg"
-            alt="Фото профиля"
-            className="profile__avatar"
-          />
-          <div className="profile__avatar-edit"></div>
-          <div className="profile-info">
-            <h1 className="profile-info__name">Жак-Ив Кусто</h1>
-            <button className="profile-info__edit-button" type="button"></button>
-            <p className="profile-info__job">Исследователь океана</p>
-          </div>
-          <button className="profile__add-button" type="button"></button>
-        </section>
-
-        <section className="places"></section>
-      </main>
-
-      <footer className="footer">
-        <p>&copy; 2021 Mesto Russia</p>
-      </footer>
+      
     </div>
 
     {/* попап профиля */}
