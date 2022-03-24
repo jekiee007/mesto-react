@@ -155,21 +155,6 @@ function App() {
           </button>
         </div>
       </div> */}
-
-      {/* "место" - карточка */}
-      {/* <template id="placeCard">
-        <div className="card">
-          <button type="button" className="card__remove"></button>
-          <img src="#" alt="#" className="card__image" />
-          <div className="card__place-options">
-            <h2 className="card__place-name"></h2>
-            <div className="card__button-container">
-              <button type="button" className="card__like"></button>
-              <p className="card__like_counter">0</p>
-            </div>
-          </div>
-        </div>
-      </template> */}
     </div>
   );
 }
