@@ -5,10 +5,12 @@ import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
 
-function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+function App(props) {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOped] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   function handleEditAvatarClick() {
     setIsAvatarPopupOpen(true);
@@ -22,10 +24,15 @@ function App() {
     setIsAddPlacePopupOped(true);
   }
 
-  function closeAllPopups(){
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
+
+  function closeAllPopups() {
     setIsAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setIsAddPlacePopupOped(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -36,6 +43,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
 
@@ -129,32 +137,7 @@ function App() {
           }
         />
       </div>
-
-      {/* Попап обновления аватара */}
-      {/* <div className="popup" id="popupAvatarUpdate">
-        <div className="popup__card-editor">
-          <button className="popup__close" type="button"></button>
-          <h2 className="popup__title">Обновить аватар</h2> */}
-      {/* форма аватара */}
-      {/* <form className="popup__form" name="popupForm" noValidate>
-            
-            <button className="popup__button" type="submit">
-              Обновить
-            </button>
-          </form>
-        </div>
-      </div> */}
-
-      {/*  Попап подтверждения удаления карточки */}
-      {/* <div className="popup" id="deleteConfirmation">
-        <div className="popup__delete-picture-confirm">
-          <h2 className="popup__title">Вы уверены?</h2>
-          <button type="button" className="popup__close"></button>
-          <button className="popup__button popup__button_delete-confirm">
-            Да
-          </button>
-        </div>
-      </div> */}
+      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
     </div>
   );
 }
