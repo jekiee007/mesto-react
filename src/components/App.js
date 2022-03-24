@@ -4,15 +4,30 @@ import Main from "./Main";
 import Footer from "./Footer";
 
 function App() {
-  return (
 
+  function handleEditAvatarClick()  {
+    const e = document.querySelector('#popupAvatarUpdate')
+   e.classList.add("popup_opened");
+  };
+
+  function handleEditProfileClick() {
+    const e = document.querySelector('#popupProfile');
+    e.classList.add("popup_opened");
+  };
+
+  function handleAddPlaceClick() {
+    const e = document.querySelector('#popupCardCreator');
+    e.classList.add("popup_opened");
+  };
+
+  return (
   <body className="page">
     <div className="page__container">
       <Header />
       <Main 
-      handleEditAvatarClick
-      handleEditProfileClick
-      handleAddPlaceClick
+      onEditAvatar={handleEditAvatarClick}
+      onEditProfile={handleEditProfileClick} 
+      onAddPlace={handleAddPlaceClick} 
       />
       <Footer />
 
