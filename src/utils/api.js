@@ -14,6 +14,7 @@ class Api {
 
   // получение инфо профиля
   getProfileInfo() {
+    // console.log(`${this._url}/users/me`);
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     }).then(this._handleResponse);
@@ -60,16 +61,23 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  likeCard(data) {
-    return fetch(`${this._url}/cards/${data}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this._handleResponse);
-  }
+  // likeCard(data) {
+  //   return fetch(`${this._url}/cards/${data}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   }).then(this._handleResponse);
+  // }
 
-  dislikeCard(data) {
+  // dislikeCard(data) {
+  //   return fetch(`${this._url}/cards/${data}/likes`, {
+  //     method: "DELETE",
+  //     headers: this._headers,
+  //   }).then(this._handleResponse);
+  // }
+
+  changeLikeCardStatus(data, isLiked){
     return fetch(`${this._url}/cards/${data}/likes`, {
-      method: "DELETE",
+      method: isLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
     }).then(this._handleResponse);
   }

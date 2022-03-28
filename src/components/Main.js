@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../utils/api";
+// import api from "../utils/api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -9,6 +9,7 @@ export default function Main({
   onAddPlace, 
   onCardClick,
   cards, 
+  onCardLike
 }) {
 
   // React.useEffect(() =>
@@ -52,6 +53,7 @@ export default function Main({
           key={card._id} 
           card={card} 
           onCardClick={onCardClick}
+          onCardLike={onCardLike}
           />
         ))}
       </section>

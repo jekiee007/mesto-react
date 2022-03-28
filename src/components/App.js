@@ -50,6 +50,18 @@ function App() {
       })
   );
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    // пока дошло, что метода changeLikeCardStatus нету в апи >_<
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -61,7 +73,7 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
             cards={cards}
-            // onCardLike={handleCardLike}
+            onCardLike={handleCardLike}
             // onCardDelete={handleCardDelete}
           />
           <Footer />
