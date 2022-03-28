@@ -14,7 +14,6 @@ class Api {
 
   // получение инфо профиля
   getProfileInfo() {
-    // console.log(`${this._url}/users/me`);
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     }).then(this._handleResponse);
