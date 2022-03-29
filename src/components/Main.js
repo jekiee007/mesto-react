@@ -3,34 +3,25 @@ import React from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function Main({ 
-  onEditAvatar, 
-  onEditProfile, 
-  onAddPlace, 
+export default function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
   onCardClick,
-  cards, 
+  cards,
   onCardLike,
   onCardDelete,
 }) {
-
-  // React.useEffect(() =>
-  //   Promise.all([api.getProfileInfo(), api.getCards()])
-  //     .then(([data, cards]) => {
-  //       // setUserName(data.name);
-  //       // setUserDescription(data.about);
-  //       // setUserAvatar(data.avatar);
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка получения данных с сервера ${err}`);
-  //     })
-  // );
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main>
       <section className="profile">
-        <img src={currentUser.avatar} alt="Фото профиля" className="profile__avatar" />
+        <img
+          src={currentUser.avatar}
+          alt="Фото профиля"
+          className="profile__avatar"
+        />
         <div className="profile__avatar-edit" onClick={onEditAvatar}></div>
         <div className="profile-info">
           <h1 className="profile-info__name">{currentUser.name}</h1>
@@ -50,12 +41,12 @@ export default function Main({
 
       <section className="places">
         {cards.map((card) => (
-          <Card 
-          key={card._id} 
-          card={card} 
-          onCardClick={onCardClick}
-          onCardLike={onCardLike}
-          onCardDelete={onCardDelete}
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
       </section>
