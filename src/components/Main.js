@@ -9,7 +9,8 @@ export default function Main({
   onAddPlace, 
   onCardClick,
   cards, 
-  onCardLike
+  onCardLike,
+  onCardDelete,
 }) {
 
   // React.useEffect(() =>
@@ -54,6 +55,7 @@ export default function Main({
           card={card} 
           onCardClick={onCardClick}
           onCardLike={onCardLike}
+          onCardDelete={onCardDelete}
           />
         ))}
       </section>

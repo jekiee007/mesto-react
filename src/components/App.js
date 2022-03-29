@@ -62,6 +62,14 @@ function App() {
     });
   }
 
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id === card._id));
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -74,7 +82,7 @@ function App() {
             onCardClick={handleCardClick}
             cards={cards}
             onCardLike={handleCardLike}
-            // onCardDelete={handleCardDelete}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
 
@@ -168,9 +176,11 @@ function App() {
             }
           />
         </div>
+        
         <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+        
       </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
   );
 }
 
