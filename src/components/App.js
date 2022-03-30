@@ -3,7 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
+import AddPlacePopup from "./AddPlacePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import api from "../utils/api";
@@ -97,7 +97,7 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => console.log(`Оошибка: ${err}`));
+      .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
   return (
@@ -116,17 +116,17 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
-          />
+          ></AddPlacePopup>
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
-          />
+          ></EditAvatarPopup>
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}

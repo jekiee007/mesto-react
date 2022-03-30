@@ -2,12 +2,12 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const [cardName, setCardName] = React.useState("");
-  const [cardImage, setCardImage] = React.useState("");
+  const [cardTitle, setCardTitle] = React.useState("");
+  const [cardURL, setCardURL] = React.useState("");
 
   React.useEffect(() => {
-    setCardName("");
-    setCardImage("");
+    setCardTitle("");
+    setCardURL("");
   }, [isOpen]);
 
   function handleClose() {
@@ -17,9 +17,17 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({
-          name: cardName,
-          link: cardImage,
+          name: cardTitle,
+          link: cardURL,
     })
+  }
+
+  function handleCardTitle(e){
+    setCardTitle(e.target.value);
+  }
+
+  function handleCardURL(e){
+    setCardURL(e.target.value);
   }
 
   return (
@@ -37,6 +45,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             name="title"
             type="text"
             id="title-input"
+            onChange={handleCardTitle}
             minLength="2"
             maxLength="30"
             placeholder="Название"
@@ -47,6 +56,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           <input
             className="popup__input popup__input_type_url"
             name="popupTypeURL"
+            onChange={handleCardURL}
             type="url"
             id="url-input"
             placeholder="Ссылка на картинку"
