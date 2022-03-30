@@ -1,39 +1,36 @@
 import React from "react";
-import api from "../utils/api";
+// import api from "../utils/api";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() =>
-    Promise.all([api.getProfileInfo(), api.getCards()])
-      .then(([data, cards]) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(`Ошибка получения данных с сервера ${err}`);
-      })
-  );
+export default function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  cards,
+  onCardLike,
+  onCardDelete,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main>
       <section className="profile">
-        <img src={userAvatar} alt="Фото профиля" className="profile__avatar" />
+        <img
+          src={currentUser.avatar}
+          alt="Фото профиля"
+          className="profile__avatar"
+        />
         <div className="profile__avatar-edit" onClick={onEditAvatar}></div>
         <div className="profile-info">
-          <h1 className="profile-info__name">{userName}</h1>
+          <h1 className="profile-info__name">{currentUser.name}</h1>
           <button
             className="profile-info__edit-button"
             type="button"
             onClick={onEditProfile}
           ></button>
-          <p className="profile-info__job">{userDescription}</p>
+          <p className="profile-info__job">{currentUser.about}</p>
         </div>
         <button
           className="profile__add-button"
@@ -44,7 +41,13 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
 
       <section className="places">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={onCardClick}/>
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
         ))}
       </section>
     </main>
