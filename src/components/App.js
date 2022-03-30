@@ -20,46 +20,55 @@ function App() {
 
   const handleEditAvatarClick = () => {
     setIsAvatarPopupOpen(true);
-  }
+  };
 
   const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
-  }
+  };
 
-  const  handleAddPlaceClick = () => {
+  const handleAddPlaceClick = () => {
     setIsAddPlacePopupOped(true);
-  }
+  };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
-  }
+  };
 
   const closeAllPopups = () => {
     setIsAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setIsAddPlacePopupOped(false);
     setSelectedCard(null);
-  }
+  };
 
-  React.useEffect(() =>
-    Promise.all([api.getProfileInfo(), api.getCards()])
-      .then(([data, cards]) => {
-        setCurrentUser(data);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  , []);
+  React.useEffect(
+    () =>
+      Promise.all([api.getProfileInfo(), api.getCards()])
+        .then(([data, cards]) => {
+          setCurrentUser(data);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(err);
+        }),
+    []
+  );
 
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
-  }
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   function handleCardDelete(card) {
     api
@@ -78,7 +87,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
-  }
+  };
 
   function handleUpdateAvatar(data) {
     api
@@ -98,7 +107,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
