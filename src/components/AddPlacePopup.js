@@ -46,6 +46,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             type="text"
             id="title-input"
             onChange={handleCardTitle}
+            value={cardTitle}
             minLength="2"
             maxLength="30"
             placeholder="Название"
@@ -57,6 +58,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             className="popup__input popup__input_type_url"
             name="popupTypeURL"
             onChange={handleCardURL}
+            value={cardURL}
             type="url"
             id="url-input"
             placeholder="Ссылка на картинку"
