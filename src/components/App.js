@@ -18,23 +18,23 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
-  function handleEditAvatarClick() {
+  const handleEditAvatarClick = () => {
     setIsAvatarPopupOpen(true);
   }
 
-  function handleEditProfileClick() {
+  const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
   }
 
-  function handleAddPlaceClick() {
+  const  handleAddPlaceClick = () => {
     setIsAddPlacePopupOped(true);
   }
 
-  function handleCardClick(card) {
+  const handleCardClick = (card) => {
     setSelectedCard(card);
   }
 
-  function closeAllPopups() {
+  const closeAllPopups = () => {
     setIsAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setIsAddPlacePopupOped(false);
@@ -46,13 +46,13 @@ function App() {
       .then(([data, cards]) => {
         setCurrentUser(data);
         setCards(cards);
-      })
+      }, [])
       .catch((err) => {
         console.log(`Ошибка получения данных с сервера ${err}`);
       })
-  );
+  , []);
 
-  function handleCardLike(card) {
+  const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -70,7 +70,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  function handleUpdateUser(data) {
+  const handleUpdateUser = (data) => {
     api
       .setProfileInfo(data)
       .then((data) => {
@@ -90,7 +90,7 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
-  function handleAddPlaceSubmit(card) {
+  const handleAddPlaceSubmit = (card) => {
     api
       .addCard(card)
       .then((newCard) => {
